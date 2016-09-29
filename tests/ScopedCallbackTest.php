@@ -26,7 +26,7 @@ namespace Wikimedia\ScopedCallback\Test;
 use Wikimedia\ScopedCallback;
 
 /**
- * @covers ScopedCallback
+ * @covers \Wikimedia\ScopedCallback
  */
 class ScopedCallbackTest extends \PHPUnit_Framework_TestCase {
 
