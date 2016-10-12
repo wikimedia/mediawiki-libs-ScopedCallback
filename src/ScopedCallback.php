@@ -25,7 +25,7 @@
 namespace Wikimedia;
 
 /**
- * Class for asserting that a callback happens when an dummy object leaves scope
+ * Class for asserting that a callback happens when a dummy object leaves scope
  */
 class ScopedCallback {
 	/** @var callable */
@@ -35,7 +35,7 @@ class ScopedCallback {
 
 	/**
 	 * @param callable|null $callback
-	 * @param array $params Callback arguments (since 1.25)
+	 * @param array $params Callback arguments (since 1.0.0, MediaWiki 1.25)
 	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( $callback, array $params = [] ) {
@@ -48,7 +48,7 @@ class ScopedCallback {
 
 	/**
 	 * Trigger a scoped callback and destroy it.
-	 * This is the same is just setting it to null.
+	 * This is the same as just setting it to null.
 	 *
 	 * @param ScopedCallback $sc
 	 */
@@ -57,7 +57,7 @@ class ScopedCallback {
 	}
 
 	/**
-	 * Destroy a scoped callback without triggering it
+	 * Destroy a scoped callback without triggering it.
 	 *
 	 * @param ScopedCallback $sc
 	 */
@@ -69,7 +69,7 @@ class ScopedCallback {
 	}
 
 	/**
-	 * Trigger the callback when this leaves scope
+	 * Trigger the callback when it leaves scope.
 	 */
 	function __destruct() {
 		if ( $this->callback !== null ) {
