@@ -28,7 +28,7 @@ use Wikimedia\ScopedCallback;
 /**
  * @covers \Wikimedia\ScopedCallback
  */
-class ScopedCallbackTest extends \PHPUnit_Framework_TestCase {
+class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 
 	public function testScopedCallback() {
 		$called = false;
