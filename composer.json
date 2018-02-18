@@ -1,7 +1,7 @@
 {
 	"name": "wikimedia/scoped-callback",
 	"description": "Class for asserting that a callback happens when a dummy object leaves scope",
-	"license": "GPL-2.0+",
+	"license": "GPL-2.0-or-later",
 	"homepage": "https://www.mediawiki.org/wiki/ScopedCallback",
 	"authors": [
 		{
