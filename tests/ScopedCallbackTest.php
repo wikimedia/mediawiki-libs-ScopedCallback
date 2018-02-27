@@ -61,8 +61,10 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $called, 'Callback was not called' );
 	}
 
+	/**
+	 * @expectedException \InvalidArgumentException
+	 */
 	public function testInvalidConstructor() {
-		$this->setExpectedException( \InvalidArgumentException::class );
 		new ScopedCallback( 'not a valid callback' );
 	}
 
