@@ -76,4 +76,19 @@ class ScopedCallback {
 			call_user_func_array( $this->callback, $this->params );
 		}
 	}
+
+	/**
+	 * Do not allow this class to be serialized
+	 */
+	function __sleep() {
+		throw new \UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
+	}
+
+	/**
+	 * Protect the caller against arbitrary code execution
+	 */
+	function __wakeup() {
+		$this->callback = null;
+		throw new \UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
+	}
 }
