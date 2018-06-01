@@ -68,4 +68,20 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 		new ScopedCallback( 'not a valid callback' );
 	}
 
+	/**
+	 * @expectedException \UnexpectedValueException
+	 */
+	public function testSerialize() {
+		serialize( new ScopedCallback( 'shell_exec', [ 'echo hi' ] ) );
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 */
+	public function testUnserialize() {
+		// phpcs:ignore Generic.Files.LineLength.TooLong
+		$serialized = 'O:24:"Wikimedia\\ScopedCallback":2:{s:11:"' . "\0" . '*' . "\0" . 'callback";s:10:"shell_exec";s:9:"' . "\0" . '*' . "\0" . 'params";a:1:{i:0;s:7:"echo hi";}}';
+		unserialize( $serialized );
+	}
+
 }
