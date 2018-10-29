@@ -69,6 +69,26 @@ class ScopedCallback {
 	}
 
 	/**
+	 * Make PHP ignore user aborts/disconnects until the returned
+	 * value leaves scope. This returns null and does nothing in CLI mode.
+	 *
+	 * @since 3.0.0
+	 * @return ScopedCallback|null
+	 */
+	public static function newScopedIgnoreUserAbort() {
+		// https://bugs.php.net/bug.php?id=47540
+		if ( PHP_SAPI != 'cli' ) {
+			// avoid half-finished operations
+			$old = ignore_user_abort( true );
+			return new ScopedCallback( function () use ( $old ) {
+				ignore_user_abort( $old );
+			} );
+		}
+
+		return null;
+	}
+
+	/**
 	 * Trigger the callback when it leaves scope.
 	 */
 	function __destruct() {
