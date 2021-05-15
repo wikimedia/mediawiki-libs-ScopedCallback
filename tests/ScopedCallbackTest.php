@@ -32,7 +32,7 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 
 	public function testScopedCallback() {
 		$called = false;
-		$sc = new ScopedCallback( function () use ( &$called ) {
+		$sc = new ScopedCallback( static function () use ( &$called ) {
 			$called = true;
 		} );
 
@@ -51,7 +51,7 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCancel() {
 		$called = false;
-		$sc = new ScopedCallback( function () use ( &$called ) {
+		$sc = new ScopedCallback( static function () use ( &$called ) {
 			$called = true;
 		} );
 

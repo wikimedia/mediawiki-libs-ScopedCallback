@@ -84,7 +84,7 @@ class ScopedCallback {
 		if ( PHP_SAPI != 'cli' ) {
 			// avoid half-finished operations
 			$old = ignore_user_abort( true );
-			return new ScopedCallback( function () use ( $old ) {
+			return new ScopedCallback( static function () use ( $old ) {
 				ignore_user_abort( $old );
 			} );
 		}
