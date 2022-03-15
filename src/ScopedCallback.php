@@ -28,7 +28,7 @@ namespace Wikimedia;
  * Class for asserting that a callback happens when a dummy object leaves scope
  */
 class ScopedCallback {
-	/** @var callable */
+	/** @var callable|null */
 	protected $callback;
 	/** @var array */
 	protected $params;
@@ -85,7 +85,7 @@ class ScopedCallback {
 			// avoid half-finished operations
 			$old = ignore_user_abort( true );
 			return new ScopedCallback( static function () use ( $old ) {
-				ignore_user_abort( $old );
+				ignore_user_abort( (bool)$old );
 			} );
 		}
 
@@ -103,6 +103,7 @@ class ScopedCallback {
 
 	/**
 	 * Do not allow this class to be serialized
+	 * @return never
 	 */
 	function __sleep() {
 		throw new \UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
@@ -110,6 +111,7 @@ class ScopedCallback {
 
 	/**
 	 * Protect the caller against arbitrary code execution
+	 * @return never
 	 */
 	function __wakeup() {
 		$this->callback = null;
