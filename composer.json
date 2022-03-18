@@ -1,6 +1,6 @@
 {
 	"name": "wikimedia/scoped-callback",
-	"description": "Class for asserting that a callback happens when a dummy object leaves scope",
+	"description": "Make a callback run when a dummy object leaves the scope.",
 	"license": "GPL-2.0-or-later",
 	"homepage": "https://www.mediawiki.org/wiki/ScopedCallback",
 	"authors": [
@@ -31,16 +31,15 @@
 			"parallel-lint . --exclude vendor",
 			"phpunit",
 			"covers-validator",
-			"@phpcs",
-			"phan --allow-polyfill-parser --long-progress-bar",
+			"phpcs -sp",
+			"@phan",
 			"minus-x check ."
 		],
+		"phan": "phan --allow-polyfill-parser --long-progress-bar",
 		"cover": "phpunit --coverage-html coverage",
 		"fix": [
 			"minus-x fix .",
 			"phpcbf"
-		],
-		"phan": "phan -d . --long-progress-bar",
-		"phpcs": "phpcs -sp"
+		]
 	}
 }

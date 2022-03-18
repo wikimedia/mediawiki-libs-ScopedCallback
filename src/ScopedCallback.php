@@ -24,8 +24,11 @@
 
 namespace Wikimedia;
 
+use InvalidArgumentException;
+use UnexpectedValueException;
+
 /**
- * Class for asserting that a callback happens when a dummy object leaves scope
+ * Make a callback run when a dummy object leaves the scope.
  */
 class ScopedCallback {
 	/** @var callable|null */
@@ -36,11 +39,10 @@ class ScopedCallback {
 	/**
 	 * @param callable|null $callback
 	 * @param array $params Callback arguments (since 1.0.0, MediaWiki 1.25)
-	 * @throws \InvalidArgumentException
 	 */
 	public function __construct( $callback, array $params = [] ) {
 		if ( $callback !== null && !is_callable( $callback ) ) {
-			throw new \InvalidArgumentException( "Provided callback is not valid." );
+			throw new InvalidArgumentException( 'Provided callback is not valid.' );
 		}
 		$this->callback = $callback;
 		$this->params = $params;
@@ -106,7 +108,7 @@ class ScopedCallback {
 	 * @return never
 	 */
 	function __sleep() {
-		throw new \UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
+		throw new UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
 	}
 
 	/**
@@ -115,6 +117,6 @@ class ScopedCallback {
 	 */
 	function __wakeup() {
 		$this->callback = null;
-		throw new \UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
+		throw new UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
 	}
 }
