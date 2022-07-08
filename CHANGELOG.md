@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.0.0 (2022-07-08)
 
 * Drop PHP 7.0, 7.1, and HHVM support. Require PHP 7.2+. (James D. Forrester)
 
