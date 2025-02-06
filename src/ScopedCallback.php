@@ -99,7 +99,7 @@ class ScopedCallback {
 	 */
 	function __destruct() {
 		if ( $this->callback !== null ) {
-			call_user_func_array( $this->callback, $this->params );
+			( $this->callback )( ...$this->params );
 		}
 	}
 
