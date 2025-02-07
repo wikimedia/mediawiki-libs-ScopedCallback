@@ -43,8 +43,8 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 
 	public function testParams() {
 		$params = [ 'foo', 'bar', 'baz' ];
-		$sc = new ScopedCallback( function () {
-			$this->assertSame( [ 'foo', 'bar', 'baz' ], func_get_args() );
+		$sc = new ScopedCallback( function ( ...$args ) {
+			$this->assertSame( [ 'foo', 'bar', 'baz' ], $args );
 		}, $params );
 		ScopedCallback::consume( $sc );
 	}
