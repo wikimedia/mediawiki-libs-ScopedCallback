@@ -97,7 +97,7 @@ class ScopedCallback {
 	/**
 	 * Trigger the callback when it leaves scope.
 	 */
-	function __destruct() {
+	public function __destruct() {
 		if ( $this->callback !== null ) {
 			( $this->callback )( ...$this->params );
 		}
@@ -107,7 +107,7 @@ class ScopedCallback {
 	 * Do not allow this class to be serialized
 	 * @return never
 	 */
-	function __sleep() {
+	public function __sleep() {
 		throw new UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
 	}
 
@@ -115,7 +115,7 @@ class ScopedCallback {
 	 * Protect the caller against arbitrary code execution
 	 * @return never
 	 */
-	function __wakeup() {
+	public function __wakeup() {
 		$this->callback = null;
 		throw new UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
 	}
