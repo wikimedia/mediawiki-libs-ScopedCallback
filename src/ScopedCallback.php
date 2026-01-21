@@ -10,7 +10,6 @@
 
 namespace Wikimedia;
 
-use InvalidArgumentException;
 use UnexpectedValueException;
 
 /**
@@ -26,10 +25,7 @@ class ScopedCallback {
 	 * @param callable|null $callback
 	 * @param array $params Callback arguments (since 1.0.0, MediaWiki 1.25)
 	 */
-	public function __construct( $callback, array $params = [] ) {
-		if ( $callback !== null && !is_callable( $callback ) ) {
-			throw new InvalidArgumentException( 'Provided callback is not valid.' );
-		}
+	public function __construct( ?callable $callback, array $params = [] ) {
 		$this->callback = $callback;
 		$this->params = $params;
 	}
