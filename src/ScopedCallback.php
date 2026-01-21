@@ -87,17 +87,15 @@ class ScopedCallback {
 
 	/**
 	 * Do not allow this class to be serialized
-	 * @return never
 	 */
-	public function __sleep() {
+	public function __sleep(): never {
 		throw new UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
 	}
 
 	/**
 	 * Protect the caller against arbitrary code execution
-	 * @return never
 	 */
-	public function __wakeup() {
+	public function __wakeup(): never {
 		$this->callback = null;
 		throw new UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
 	}
