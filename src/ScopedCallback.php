@@ -57,12 +57,12 @@ class ScopedCallback {
 	 * value leaves scope. This returns null and does nothing in CLI mode.
 	 *
 	 * @since 3.0.0
-	 * @return ScopedCallback|null
 	 *
 	 * @codeCoverageIgnore CI is only run via CLI, so this will never be exercised.
 	 * Also no benefit testing a function just returns null.
 	 */
-	public static function newScopedIgnoreUserAbort() {
+	#[\NoDiscard]
+	public static function newScopedIgnoreUserAbort(): ?ScopedCallback {
 		// ignore_user_abort previously caused an infinite loop on CLI
 		// https://bugs.php.net/bug.php?id=47540
 		if ( PHP_SAPI != 'cli' ) {

@@ -15,6 +15,7 @@
 		}
 	},
 	"require": {
+		"symfony/polyfill-php85": "1.33.0",
 		"php": ">=8.1"
 	},
 	"require-dev": {
