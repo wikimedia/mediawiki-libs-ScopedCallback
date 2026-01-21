@@ -37,8 +37,6 @@ class ScopedCallback {
 	/**
 	 * Trigger a scoped callback and destroy it.
 	 * This is the same as just setting it to null.
-	 *
-	 * @param ?ScopedCallback &$sc
 	 */
 	public static function consume( ?ScopedCallback &$sc ) {
 		$sc = null;
@@ -46,8 +44,6 @@ class ScopedCallback {
 
 	/**
 	 * Destroy a scoped callback without triggering it.
-	 *
-	 * @param ?ScopedCallback &$sc
 	 */
 	public static function cancel( ?ScopedCallback &$sc ) {
 		if ( $sc ) {
