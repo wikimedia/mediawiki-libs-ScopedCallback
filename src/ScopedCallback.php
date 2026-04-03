@@ -1,4 +1,6 @@
 <?php
+declare( strict_types = 1 );
+
 /**
  * This file deals with RAII style scoped callbacks.
  *
