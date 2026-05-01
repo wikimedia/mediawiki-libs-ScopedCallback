@@ -36,14 +36,14 @@ class ScopedCallback {
 	 * Trigger a scoped callback and destroy it.
 	 * This is the same as just setting it to null.
 	 */
-	public static function consume( ?ScopedCallback &$sc ) {
+	public static function consume( ?ScopedCallback &$sc ): void {
 		$sc = null;
 	}
 
 	/**
 	 * Destroy a scoped callback without triggering it.
 	 */
-	public static function cancel( ?ScopedCallback &$sc ) {
+	public static function cancel( ?ScopedCallback &$sc ): void {
 		if ( $sc ) {
 			$sc->callback = null;
 		}
@@ -66,7 +66,7 @@ class ScopedCallback {
 		if ( PHP_SAPI != 'cli' ) {
 			// avoid half-finished operations
 			$old = ignore_user_abort( true );
-			return new ScopedCallback( static function () use ( $old ) {
+			return new ScopedCallback( static function () use ( $old ): void {
 				ignore_user_abort( (bool)$old );
 			} );
 		}

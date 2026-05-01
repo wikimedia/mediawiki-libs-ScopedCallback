@@ -18,9 +18,9 @@ use Wikimedia\ScopedCallback;
  */
 class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 
-	public function testScopedCallback() {
+	public function testScopedCallback(): void {
 		$called = false;
-		$sc = new ScopedCallback( static function () use ( &$called ) {
+		$sc = new ScopedCallback( static function () use ( &$called ): void {
 			$called = true;
 		} );
 
@@ -29,17 +29,17 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $called, 'Callback was called' );
 	}
 
-	public function testParams() {
+	public function testParams(): void {
 		$params = [ 'foo', 'bar', 'baz' ];
-		$sc = new ScopedCallback( function ( ...$args ) {
+		$sc = new ScopedCallback( function ( ...$args ): void {
 			$this->assertSame( [ 'foo', 'bar', 'baz' ], $args );
 		}, $params );
 		ScopedCallback::consume( $sc );
 	}
 
-	public function testCancel() {
+	public function testCancel(): void {
 		$called = false;
-		$sc = new ScopedCallback( static function () use ( &$called ) {
+		$sc = new ScopedCallback( static function () use ( &$called ): void {
 			$called = true;
 		} );
 
@@ -49,17 +49,17 @@ class ScopedCallbackTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $called, 'Callback was not called' );
 	}
 
-	public function testInvalidConstructor() {
+	public function testInvalidConstructor(): void {
 		$this->expectException( \TypeError::class );
 		new ScopedCallback( 'not a valid callback' );
 	}
 
-	public function testSerialize() {
+	public function testSerialize(): void {
 		$this->expectException( \UnexpectedValueException::class );
 		serialize( new ScopedCallback( 'shell_exec', [ 'echo hi' ] ) );
 	}
 
-	public function testUnserialize() {
+	public function testUnserialize(): void {
 		// phpcs:ignore Generic.Files.LineLength.TooLong
 		$serialized = 'O:24:"Wikimedia\\ScopedCallback":2:{s:11:"' . "\0" . '*' . "\0" . 'callback";s:10:"shell_exec";s:9:"' . "\0" . '*' . "\0" . 'params";a:1:{i:0;s:7:"echo hi";}}';
 		$this->expectException( \UnexpectedValueException::class );
