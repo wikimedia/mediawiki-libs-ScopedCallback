@@ -36,14 +36,14 @@ class ScopedCallback {
 	 * Trigger a scoped callback and destroy it.
 	 * This is the same as just setting it to null.
 	 */
-	public static function consume( ?ScopedCallback &$sc ): void {
+	public static function consume( ?self &$sc ): void {
 		$sc = null;
 	}
 
 	/**
 	 * Destroy a scoped callback without triggering it.
 	 */
-	public static function cancel( ?ScopedCallback &$sc ): void {
+	public static function cancel( ?self &$sc ): void {
 		if ( $sc ) {
 			$sc->callback = null;
 		}
@@ -60,13 +60,13 @@ class ScopedCallback {
 	 * Also no benefit testing a function just returns null.
 	 */
 	#[\NoDiscard]
-	public static function newScopedIgnoreUserAbort(): ?ScopedCallback {
+	public static function newScopedIgnoreUserAbort(): ?self {
 		// ignore_user_abort previously caused an infinite loop on CLI
 		// https://bugs.php.net/bug.php?id=47540
-		if ( PHP_SAPI != 'cli' ) {
+		if ( PHP_SAPI !== 'cli' ) {
 			// avoid half-finished operations
 			$old = ignore_user_abort( true );
-			return new ScopedCallback( static function () use ( $old ): void {
+			return new self( static function () use ( $old ): void {
 				ignore_user_abort( (bool)$old );
 			} );
 		}
@@ -87,7 +87,7 @@ class ScopedCallback {
 	 * Do not allow this class to be serialized
 	 */
 	public function __serialize(): never {
-		throw new UnexpectedValueException( __CLASS__ . ' cannot be serialized' );
+		throw new UnexpectedValueException( static::class . ' cannot be serialized' );
 	}
 
 	/**
@@ -95,6 +95,6 @@ class ScopedCallback {
 	 */
 	public function __unserialize( array $data ): never {
 		$this->callback = null;
-		throw new UnexpectedValueException( __CLASS__ . ' cannot be unserialized' );
+		throw new UnexpectedValueException( static::class . ' cannot be unserialized' );
 	}
 }
